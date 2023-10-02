@@ -12,6 +12,10 @@
 		EC251303210B3196001902E0 /* NpyLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2512FB210B3196001902E0 /* NpyLoader.swift */; };
 		EC251304210B3196001902E0 /* NpyHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2512FC210B3196001902E0 /* NpyHeader.swift */; };
 		EC251307210B3196001902E0 /* Npy.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2512FF210B3196001902E0 /* Npy.swift */; };
+		EC8B5E442ACB5198002AEA38 /* hX.npy in Resources */ = {isa = PBXBuildFile; fileRef = EC8B5E402ACB5198002AEA38 /* hX.npy */; };
+		EC8B5E452ACB5198002AEA38 /* hbias_150.npy in Resources */ = {isa = PBXBuildFile; fileRef = EC8B5E412ACB5198002AEA38 /* hbias_150.npy */; };
+		EC8B5E472ACB5198002AEA38 /* hW_150.npy in Resources */ = {isa = PBXBuildFile; fileRef = EC8B5E432ACB5198002AEA38 /* hW_150.npy */; };
+		EC8B5E4A2ACB524E002AEA38 /* hY.npy in Resources */ = {isa = PBXBuildFile; fileRef = EC8B5E492ACB524E002AEA38 /* hY.npy */; };
 		ECC93E85210F43730020EA64 /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC93E83210F43720020EA64 /* utils.swift */; };
 		ECC93E86210F43730020EA64 /* ELM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC93E84210F43720020EA64 /* ELM.swift */; };
 		ECCED54D210F588100C4A6F3 /* y.npy in Resources */ = {isa = PBXBuildFile; fileRef = ECCED513210F583F00C4A6F3 /* y.npy */; };
@@ -32,6 +36,10 @@
 		EC2512FB210B3196001902E0 /* NpyLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NpyLoader.swift; sourceTree = "<group>"; };
 		EC2512FC210B3196001902E0 /* NpyHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NpyHeader.swift; sourceTree = "<group>"; };
 		EC2512FF210B3196001902E0 /* Npy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Npy.swift; sourceTree = "<group>"; };
+		EC8B5E402ACB5198002AEA38 /* hX.npy */ = {isa = PBXFileReference; lastKnownFileType = file; path = hX.npy; sourceTree = "<group>"; };
+		EC8B5E412ACB5198002AEA38 /* hbias_150.npy */ = {isa = PBXFileReference; lastKnownFileType = file; path = hbias_150.npy; sourceTree = "<group>"; };
+		EC8B5E432ACB5198002AEA38 /* hW_150.npy */ = {isa = PBXFileReference; lastKnownFileType = file; path = hW_150.npy; sourceTree = "<group>"; };
+		EC8B5E492ACB524E002AEA38 /* hY.npy */ = {isa = PBXFileReference; lastKnownFileType = file; path = hY.npy; sourceTree = "<group>"; };
 		ECC93E83210F43720020EA64 /* utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
 		ECC93E84210F43720020EA64 /* ELM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ELM.swift; sourceTree = "<group>"; };
 		ECCED510210F583900C4A6F3 /* x.npy */ = {isa = PBXFileReference; lastKnownFileType = file; path = x.npy; sourceTree = "<group>"; };
@@ -108,6 +116,10 @@
 		ECFCCB97210F482D0032AE69 /* weights */ = {
 			isa = PBXGroup;
 			children = (
+				EC8B5E492ACB524E002AEA38 /* hY.npy */,
+				EC8B5E412ACB5198002AEA38 /* hbias_150.npy */,
+				EC8B5E432ACB5198002AEA38 /* hW_150.npy */,
+				EC8B5E402ACB5198002AEA38 /* hX.npy */,
 				ECCED513210F583F00C4A6F3 /* y.npy */,
 				ECCED514210F583F00C4A6F3 /* y1k.npy */,
 				ECCED510210F583900C4A6F3 /* x.npy */,
@@ -183,10 +195,14 @@
 				ECCED54D210F588100C4A6F3 /* y.npy in Resources */,
 				ECCED550210F588100C4A6F3 /* x1k.npy in Resources */,
 				ECCED551210F588100C4A6F3 /* xs.npy in Resources */,
+				EC8B5E452ACB5198002AEA38 /* hbias_150.npy in Resources */,
 				ECCF03C9210B21CB00C54D24 /* Assets.xcassets in Resources */,
 				ECCED54E210F588100C4A6F3 /* y1k.npy in Resources */,
+				EC8B5E442ACB5198002AEA38 /* hX.npy in Resources */,
+				EC8B5E4A2ACB524E002AEA38 /* hY.npy in Resources */,
 				ECCF03C7210B21C900C54D24 /* Main.storyboard in Resources */,
 				ECCED54F210F588100C4A6F3 /* x.npy in Resources */,
+				EC8B5E472ACB5198002AEA38 /* hW_150.npy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

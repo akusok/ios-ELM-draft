@@ -37,7 +37,7 @@ class ViewController: UIViewController, Logger {
         let allFiles = try! FileManager.default.contentsOfDirectory(at: docDir, includingPropertiesForKeys: nil)
         let myFiles = Dictionary(uniqueKeysWithValues: allFiles.map { ($0.lastPathComponent, $0) })
         
-        let bK = 19
+        let bK = 35
         let bL = 1024
         let c = 3
 
@@ -72,6 +72,7 @@ class ViewController: UIViewController, Logger {
         }
     }
     
+    
     func batchProcessing() {
         let mainBundle = Bundle.main
         let device = MTLCreateSystemDefaultDevice()!
@@ -86,7 +87,7 @@ class ViewController: UIViewController, Logger {
         let allFiles = try! FileManager.default.contentsOfDirectory(at: docDir, includingPropertiesForKeys: nil)
         let myFiles = Dictionary(uniqueKeysWithValues: allFiles.map { ($0.lastPathComponent, $0) })
         
-        let bK = 19
+        let bK = 3
         let bL = 1024
         let c = 3
         
@@ -122,12 +123,70 @@ class ViewController: UIViewController, Logger {
 
     }
     
+    func customELM() {
+        let mainBundle = Bundle.main
+        let device = MTLCreateSystemDefaultDevice()!
+        
+        self.log("All files:")
+        for url in mainBundle.urls(forResourcesWithExtension: "npy", subdirectory: nil)! {
+            self.log(url.relativePath)
+        }
+        
+        // use uploaded files
+        let docDir = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        let allFiles = try! FileManager.default.contentsOfDirectory(at: docDir, includingPropertiesForKeys: nil)
+        let myFiles = Dictionary(uniqueKeysWithValues: allFiles.map { ($0.lastPathComponent, $0) })
+        
+        let bK = 1  // weight batches
+        let bL = 150
+        let c = 1
+        
+        
+        self.log("Data file:")
+        let fileX = mainBundle.url(forResource: "hX", withExtension: "npy")!
+        let fileXs = mainBundle.url(forResource: "hX", withExtension: "npy")!
+        let fileY = mainBundle.url(forResource: "hY", withExtension: "npy")!
+        
+        let fileW = myFiles["hW_150.npy"]!
+        let fileBias = myFiles["hbias_150.npy"]!
+//        _ = filesW.map { self.log($0.absoluteString) }
+        self.log("")
+        
+        let X: MPSMatrix = loadFromNpy(contentsOf: fileX, device: device)
+        let Xs: MPSMatrix = loadFromNpy(contentsOf: fileXs, device: device)
+        let Y: MPSMatrix = loadFromNpy(contentsOf: fileY, device: device)
+        
+        let t0 = CFAbsoluteTimeGetCurrent()
+        let model = ELM(device: device, bK: bK, bL: bL, alpha: 1E1, W: [fileW], bias: [fileBias])!
+        model.fit(X: X, Y: Y)
+        let Yh = model.predict(X: Xs)!
+        let t = CFAbsoluteTimeGetCurrent() - t0
+        self.log(String(format: "Runtime: %.3f", t))
+
+        let t1 = CFAbsoluteTimeGetCurrent()
+        for j in 0 ..< 65 {
+            _ = model.predict(X: Xs)
+        }
+        let t2 = CFAbsoluteTimeGetCurrent() - t1
+        self.log(String(format: "Runtime predict: %.3f", t2))
+        self.log("")
+        
+        
+        self.log("Results")
+        let res = Yh.data.contents().bindMemory(to: Float.self, capacity: Yh.rows * c)
+        for i in 0 ..< 20 {
+            self.log(Array(0 ..< c).map { res[c*i + $0] }.map { String(format: "%.3f", $0) }.joined(separator: "\t"))
+        }
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         textField.text = nil
         // run()
-        batchProcessing()
+        // batchProcessing()
+        customELM()
     }
 
     func log(_ message: String) {
